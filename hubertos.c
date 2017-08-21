@@ -40,7 +40,8 @@ task_t *create_task(void (*code)(), void *data) {
     new_task->data = data;
     
     if(setjmp(new_task->context) == EXECUTION_POINT_REENTERED) {
-	// UWAGA: w tym miejscu parametry i zmienne lokalne nie wskazuja juz na nic sensownego
+	// WATCH OUT: any parameters or local variables do not
+	// contain any meaningful values here
 	(current_task->code)();
     }
     
